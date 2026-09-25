@@ -1,3 +1,5 @@
 venv_manga/
 __pycache__/
 *.pyc
+.env
+.cache

@@ -8,14 +8,15 @@ model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
 processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
 
 # define mood labels
-mood_labels = ["fighting", "crying", "ominous entrance", "laughing", "shouting in anger", "sitting alone", "looking longinly"]
+mood_labels = ["fighting", "crying", "ominous entrance", "laughing", "shouting in anger", "sitting alone", "looking longinly", "shock on human face"]
 
 # fetch manga page image
-proxy_url = "http://127.0.0.1:5001/fetch-image?url=https://hot.planeptune.us/manga/Naruto/0001-035.png"
+proxy_url = "http://127.0.0.1:5001/fetch-image?url=https://hot.planeptune.us/manga/Hunter-X-Hunter/0003-008.png"
 response = requests.get(proxy_url)
 
 # turn raw bites into a PIL image
 image = Image.open(BytesIO(response.content))
+image.show()
 
 inputs = processor(text=mood_labels, images=image, return_tensors="pt", padding=True)
 outputs = model(**inputs)
